@@ -1,7 +1,7 @@
 import os
 import time
 import datetime
-
+import re
 
 def run_commend(commend):
    com = os.system(commend)
