@@ -62,6 +62,21 @@ def subzy_fun(file_pass):
     output = run_commend(com)
     run_commend(f"mv subdomain_takeover_report.txt {file_path}")
 
+# Amass function
+# def amass_fun(file_path, subdomain):
+#     input_file = f"{file_path}/live_subdomain_enum.txt"
+#     output_file = f"{file_path}/{subdomain}_amass_output.txt"
+
+#     print(f"Running Amass on {input_file}")
+#     com = f"amass enum -df {input_file} -o output_file.txt"
+#     output = run_commend(com)
+#     if output == 0:
+#         print(f"Amass results saved to {output_file}")
+#     else:
+#         print("Amass encountered an error. Check your installation or input.")
+
+
+# ffuf func ---> to do []
 
 while True:
 
@@ -74,6 +89,7 @@ while True:
         subzy_fun(file_path)
         httpx_fun(file_path,subdomain)
         katana_fun(file_path)
+        # amass_fun(file_path, subdomain)
 
         break
     else:
