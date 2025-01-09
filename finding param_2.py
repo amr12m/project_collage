@@ -65,27 +65,48 @@ def process_url(url):
     for i, form in enumerate(forms, 1):
         action, method, form_params = parse_form(form)
         form_url = action if action.startswith('http') else url + action
+        print(method.upper())
+        if method.upper() == "GET":
+            for y in form_params:
+                get_method_param = form_url + '?' + y + '='
+                with open('Get_param.txt','a') as f:
+                    f.write(get_method_param +'\n')
+        elif method.upper() == "POST":
+            post_method = form_url , form_params
+            print(post_method)
 
-        print(f"\n[FORM {i}] URL: {form_url}")
-        print(f"[FORM {i}] Method: {method.upper()}")
-        print(f"[FORM {i}] Found Parameters: {form_params}")
 
 if __name__ == "__main__":
-    choice = input("Do you want to provide a single URL or a file containing URLs? (single/file): ").strip().lower()
+    
+    file_path = input("Enter the file path containing URLs: ").strip()
+    try:
+        with open(file_path, 'r') as file:
+            urls = file.readlines()
+            for url in urls:
+                process_url(url.strip())
+    except FileNotFoundError:
+        print(f"[ERROR] File not found: {file_path}")
+    except Exception as e:
+        print(f"[ERROR] An error occurred while reading the file: {e}")
 
-    if choice == "single":
-        target_url = input("Enter the URL to be tested: ").strip()
-        process_url(target_url)
-    elif choice == "file":
-        file_path = input("Enter the file path containing URLs: ").strip()
-        try:
-            with open(file_path, 'r') as file:
-                urls = file.readlines()
-                for url in urls:
-                    process_url(url.strip())
-        except FileNotFoundError:
-            print(f"[ERROR] File not found: {file_path}")
-        except Exception as e:
-            print(f"[ERROR] An error occurred while reading the file: {e}")
-    else:
-        print("[ERROR] Invalid choice. Please select 'single' or 'file'.")
+
+
+    # choice = input("Do you want to provide a single URL or a file containing URLs? (single/file): ").strip().lower()
+
+    # if choice == "single":
+    #     target_url ="https://yahoo.com"
+    #     #target_url = input("Enter the URL to be tested: ").strip()
+    #     process_url(target_url)
+    # elif choice == "file":
+    #     file_path = input("Enter the file path containing URLs: ").strip()
+    #     try:
+    #         with open(file_path, 'r') as file:
+    #             urls = file.readlines()
+    #             for url in urls:
+    #                 process_url(url.strip())
+    #     except FileNotFoundError:
+    #         print(f"[ERROR] File not found: {file_path}")
+    #     except Exception as e:
+    #         print(f"[ERROR] An error occurred while reading the file: {e}")
+    # else:
+    #     print("[ERROR] Invalid choice. Please select 'single' or 'file'.")
