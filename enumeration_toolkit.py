@@ -3,6 +3,8 @@ import time
 import datetime
 import re
 
+import finding_param_2
+
 def run_commend(commend):
     com = os.system(commend)
     return com
@@ -86,10 +88,12 @@ while True:
     # check that input is entered
     if is_domain_format(subdomain_name) is True:
         subdomain_enum(subdomain_name,subdomain,file_path)
-        subzy_fun(file_path)
         httpx_fun(file_path,subdomain)
+        subzy_fun(file_path)
         katana_fun(file_path)
         # amass_fun(file_path, subdomain)
+        finding_param_2.main(f"{file_path}/crawlling_output.txt")
+        
 
         break
     else:

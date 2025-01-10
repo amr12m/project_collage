@@ -72,13 +72,15 @@ def process_url(url):
                 with open('Get_param.txt','a') as f:
                     f.write(get_method_param +'\n')
         elif method.upper() == "POST":
-            post_method = form_url , form_params
-            print(post_method)
+            #post_method = form_url , form_params
+            #rint(post_method)
+            with open('POST_method_param.txt','a') as f:
+                     f.write(form_url +','+ str(form_params) +'\n')
 
 
-if __name__ == "__main__":
+def main(file_path):
     
-    file_path = input("Enter the file path containing URLs: ").strip()
+    
     try:
         with open(file_path, 'r') as file:
             urls = file.readlines()
@@ -89,24 +91,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"[ERROR] An error occurred while reading the file: {e}")
 
+if __name__ == "__main__":
+    main()
 
-
-    # choice = input("Do you want to provide a single URL or a file containing URLs? (single/file): ").strip().lower()
-
-    # if choice == "single":
-    #     target_url ="https://yahoo.com"
-    #     #target_url = input("Enter the URL to be tested: ").strip()
-    #     process_url(target_url)
-    # elif choice == "file":
-    #     file_path = input("Enter the file path containing URLs: ").strip()
-    #     try:
-    #         with open(file_path, 'r') as file:
-    #             urls = file.readlines()
-    #             for url in urls:
-    #                 process_url(url.strip())
-    #     except FileNotFoundError:
-    #         print(f"[ERROR] File not found: {file_path}")
-    #     except Exception as e:
-    #         print(f"[ERROR] An error occurred while reading the file: {e}")
-    # else:
-    #     print("[ERROR] Invalid choice. Please select 'single' or 'file'.")
